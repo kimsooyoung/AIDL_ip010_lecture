@@ -1,6 +1,10 @@
 <?xml version="1.0" ?>
 <robot name="ip010" xmlns:xacro="http://www.ros.org/wiki/xacro">
   
+  <xacro:include filename="$(find ip010_description)/urdf/ip010.gazebo" />
+
+  <link name='base_footprint' />
+
   <link name="base_link">
     <inertial>
       <origin xyz="-0.000385245156391871 -0.000529111847711822 0.0653719962073427" rpy="0 0 0" />
@@ -10,7 +14,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/base_link.STL" />
+        <mesh filename="$(find ip010_description)/meshes/base_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.43921568627451 0.43921568627451 0.43921568627451 1" />
@@ -19,10 +23,16 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/base_link.STL" />
+        <mesh filename="$(find ip010_description)/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
+
+  <joint name='base_link_joint' type='fixed'>
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="base_footprint" />
+    <child link="base_link" />
+  </joint>
 
   <link name="l_rear_wheel">
     <inertial>
@@ -33,7 +43,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/l_rear_wheel.STL" />
+        <mesh filename="$(find ip010_description)/meshes/l_rear_wheel.STL" />
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -42,7 +52,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/l_rear_wheel.STL" />
+        <mesh filename="$(find ip010_description)/meshes/l_rear_wheel.STL" />
       </geometry>
     </collision>
   </link>
@@ -63,7 +73,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/r_rear_wheel.STL" />
+        <mesh filename="$(find ip010_description)/meshes/r_rear_wheel.STL" />
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -72,7 +82,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/r_rear_wheel.STL" />
+        <mesh filename="$(find ip010_description)/meshes/r_rear_wheel.STL" />
       </geometry>
     </collision>
   </link>
@@ -93,7 +103,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/center_lidar.STL" />
+        <mesh filename="$(find ip010_description)/meshes/center_lidar.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -102,7 +112,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/center_lidar.STL" />
+        <mesh filename="$(find ip010_description)/meshes/center_lidar.STL" />
       </geometry>
     </collision>
   </link>
@@ -123,7 +133,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/front_camera.STL" />
+        <mesh filename="$(find ip010_description)/meshes/front_camera.STL" />
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -132,7 +142,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/front_camera.STL" />
+        <mesh filename="$(find ip010_description)/meshes/front_camera.STL" />
       </geometry>
     </collision>
   </link>
