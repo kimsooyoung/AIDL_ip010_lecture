@@ -1,0 +1,146 @@
+<?xml version="1.0" ?>
+<robot name="ip010_description" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.000385245156391871 -0.000529111847711822 0.0653719962073427" rpy="0 0 0" />
+      <mass value="1.22178095373168" />
+      <inertia ixx="0.00627094203593516" ixy="3.03044325621882E-05" ixz="0.000574351883582968" iyy="0.00807367810614195" iyz="-9.26695226612923E-06" izz="0.0136241544527254" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ip010_description/meshes/base_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.43921568627451 0.43921568627451 0.43921568627451 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ip010_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="l_rear_wheel">
+    <inertial>
+      <origin xyz="-0.000276941065544781 -0.0201570866836339 0.000883513372436709" rpy="0 0 0" />
+      <mass value="0.115203108377027" />
+      <inertia ixx="3.76597824097435E-05" ixy="4.04398415924187E-09" ixz="-7.54861656391369E-09" iyy="6.30867844960361E-05" iyz="-1.25464212048792E-08" izz="3.7679837109253E-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ip010_description/meshes/l_rear_wheel.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ip010_description/meshes/l_rear_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="l_rear_wheel" type="continuous">
+    <origin xyz="-0.0945003880978201 0.11 0.0350001078633251" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="l_rear_wheel" />
+    <axis xyz="0 -1 0" />
+  </joint>
+  
+  <link name="r_rear_wheel">
+    <inertial>
+      <origin xyz="-0.000279144572909285 0.020157085967068 0.000882819590486731" rpy="0 0 0" />
+      <mass value="0.115203107255679" />
+      <inertia ixx="3.76592750408973E-05" ixy="-3.87283160946061E-09" ixz="-6.82269545443431E-09" iyy="6.30867844954026E-05" iyz="1.26003043153597E-08" izz="3.76803444665559E-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ip010_description/meshes/r_rear_wheel.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ip010_description/meshes/r_rear_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="r_rear_wheel" type="continuous">
+    <origin xyz="-0.0944997436888031 -0.11 0.035000310739568" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="r_rear_wheel" />
+    <axis xyz="0 1 0" />
+  </joint>
+  
+  <link name="center_lidar">
+    <inertial>
+      <origin xyz="0.00745008536583489 -0.000328953238206021 -0.0193022240939329" rpy="0 0 0" />
+      <mass value="0.118327011339017" />
+      <inertia ixx="3.75663376249697E-05" ixy="-1.04736915416129E-07" ixz="-4.28429420894516E-07" iyy="4.21124856419297E-05" iyz="9.24636939164067E-09" izz="4.6508188174353E-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ip010_description/meshes/center_lidar.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ip010_description/meshes/center_lidar.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="center_lidar" type="fixed">
+    <origin xyz="-0.031999999999999 0 0.108300000000198" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="center_lidar" />
+    <!-- <axis xyz="0 0 -1" /> -->
+  </joint>
+  
+  <link name="front_camera">
+    <inertial>
+      <origin xyz="-0.00497560083527254 1.16551733542192E-18 -0.00156090309940154" rpy="0 0 0" />
+      <mass value="0.000679586163770489" />
+      <inertia ixx="5.37689116983891E-08" ixy="7.2963616570538E-26" ixz="-5.56265931483273E-10" iyy="2.8597907949626E-08" iyz="-3.19266396131941E-24" izz="2.75239156052624E-08" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ip010_description/meshes/front_camera.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://ip010_description/meshes/front_camera.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="front_camera" type="fixed">
+    <origin xyz="0.141847512071907 -0.000215421199800007 0.0680000000002" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="front_camera" />
+    <!-- <axis xyz="1 0 0" /> -->
+  </joint>
+</robot>
