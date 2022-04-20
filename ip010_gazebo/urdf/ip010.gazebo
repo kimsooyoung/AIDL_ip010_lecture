@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <robot name="ip010" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:property name="body_color" value="Gazebo/Silver" />
-  <xacro:property name="body_color" value="Gazebo/Silver" />
+  <xacro:property name="body_color" value="Gazebo/DarkGrey" />
+  <xacro:property name="wheel_color" value="Gazebo/FlatBlack" />
+  <xacro:property name="laser_color" value="Gazebo/Silver" />
+  <xacro:property name="camera_color" value="Gazebo/LightBlueLaser" />
 
   <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="control" />
@@ -10,42 +12,47 @@
 
   <gazebo reference="base_link">
     <material>${body_color}</material>
-    <mu1>0.1</mu1>
-    <mu2>0.1</mu2>
+    <mu1>100.1</mu1>
+    <mu2>100.1</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
   </gazebo>
 
   <gazebo reference="center_lidar">
-    <material>${body_color}</material>
+    <material>${laser_color}</material>
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <selfCollide>true</selfCollide>
   </gazebo>
 
   <gazebo reference="l_rear_wheel">
-    <material>${body_color}</material>
+    <material>${wheel_color}</material>
     <mu1>1500</mu1>
     <mu2>1500</mu2>
     <selfCollide>true</selfCollide>
   </gazebo>
 
   <gazebo reference="r_rear_wheel">
-    <material>${body_color}</material>
+    <material>${wheel_color}</material>
     <mu1>1500</mu1>
     <mu2>1500</mu2>
     <selfCollide>true</selfCollide>
   </gazebo>
 
+  <gazebo reference="front_camera">
+    <material>${camera_color}</material>
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
   <gazebo>
     <plugin name="joint_states" filename="libgazebo_ros_joint_state_publisher.so">
-      <joint_name>l_rear_wheel</joint_name>
-      <joint_name>r_rear_wheel</joint_name>
+      <joint_name>l_rear_wheel_joint</joint_name>
+      <joint_name>r_rear_wheel_joint</joint_name>
     </plugin>
     <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
       <update_rate>500</update_rate>
-      <left_joint>r_rear_wheel</left_joint>
-      <right_joint>l_rear_wheel</right_joint>
+      <left_joint>l_rear_wheel_joint</left_joint>
+      <right_joint>r_rear_wheel_joint</right_joint>
       <wheel_separation>0.194</wheel_separation>
       <wheel_diameter>0.035</wheel_diameter>
       <max_wheel_torque>50</max_wheel_torque>
@@ -60,40 +67,83 @@
     </plugin>
   </gazebo>
 
-  <!-- hokuyo -->
+  <!-- rplidar A1 -->
   <xacro:unless value="$(optenv DISABLE_GAZEBO_LASER false)">
     <gazebo reference="center_lidar">
       <sensor name="lidar" type="ray">
+        <!-- Rplidar A1 Specification Referred -->
+        <!-- https://www.slamtec.com/en/Lidar/A1Spec -->
         <ray>
           <scan>
             <horizontal>
-              <samples>120</samples>
+              <samples>360</samples>
               <resolution>1.000000</resolution>
               <min_angle>-3.14159</min_angle>
               <max_angle>3.14159</max_angle>
             </horizontal>
           </scan>
           <range>
-            <min>0.3</min>
-            <max>15.0</max>
+            <min>0.15</min>
+            <max>12.0</max>
             <resolution>0.015</resolution>
           </range>
           <noise>
             <type>gaussian</type>
             <mean>0.0</mean>
-            <stddev>0.01</stddev>
+            <stddev>0.0001</stddev>
           </noise>
         </ray>
         <pose>0 0 0 0 0 0</pose>
         <always_on>true</always_on>
-        <visualize>true</visualize>
-        <update_rate>30</update_rate>
+        <visualize>false</visualize>
+        <update_rate>5.5</update_rate>
         <plugin name="scan" filename="libgazebo_ros_ray_sensor.so">
           <ros>
             <remapping>~/out:=scan</remapping>
           </ros>
           <output_type>sensor_msgs/LaserScan</output_type>
           <frame_name>center_lidar</frame_name>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:unless>
+
+  <!-- csi camera -->
+  <xacro:unless value="$(optenv DISABLE_GAZEBO_CAMERA false)">
+    <gazebo reference="front_camera">
+      <sensor type="camera" name="sensor_name">
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <always_on>1</always_on>
+        <camera name="front_camera">
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>720</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <!-- <stddev>0.007</stddev> -->
+            <stddev>0.00007</stddev>
+          </noise>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <!-- Change namespace, camera name and topics so:
+               * Images are published to: /custom_ns/custom_camera/custom_image
+               * Camera info is published to: /custom_ns/custom_camera/custom_info 
+          -->
+          <ros>
+            <!-- <namespace>custom_ns</namespace> -->
+            <argument>image_raw:=image_raw</argument>
+            <argument>camera_info:=camera_info</argument>
+          </ros>
+          <hack_baseline>0.07</hack_baseline>
         </plugin>
       </sensor>
     </gazebo>
