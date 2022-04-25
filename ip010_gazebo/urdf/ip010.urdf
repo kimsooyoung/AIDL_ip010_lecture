@@ -84,7 +84,7 @@
       </ray>
       <pose>0 0 0 0 0 0</pose>
       <always_on>true</always_on>
-      <visualize>false</visualize>
+      <visualize>true</visualize>
       <update_rate>5.5</update_rate>
       <plugin filename="libgazebo_ros_ray_sensor.so" name="scan">
         <ros>
