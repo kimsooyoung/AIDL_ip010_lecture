@@ -32,3 +32,22 @@ mu 0.01 => 0.1로 변경
 ros2 run rqt_image_view rqt_image_view
 ```
 
+새로운 환경에서는 ip010_description_new.urdf를 지운 다음 다시 빌드해야 한다.
+
+* AWS Factory Gazebo
+
+
+```
+git clone -b foxy-devel https://github.com/aws-robotics/aws-robomaker-small-warehouse-world.git
+cbp aws_robomaker_small_warehouse_world && rosfoxy
+source /usr/share/gazebo/setup.sh
+
+ros2 launch fusionbot_gazebo aws_factory.launch.py
+```
+
+TODO
+
+naming change => ip010_description_new.urdf
+factory world가 새로운 환경에서도 잘 되는지
+
+
