@@ -55,6 +55,7 @@ install(
   DIRECTORY
     launch
     meshes
+    worlds
     rviz
     urdf
   DESTINATION

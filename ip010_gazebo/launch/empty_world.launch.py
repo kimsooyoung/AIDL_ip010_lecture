@@ -5,7 +5,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.actions import IncludeLaunchDescription, ExecuteProcess, RegisterEventHandler
+from launch.actions import IncludeLaunchDescription, TimerAction
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -23,7 +23,7 @@ def generate_launch_description():
     # Start Gazebo server
     start_gazebo_server_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')),
-        # launch_arguments={'world': world_path}.items()
+        launch_arguments={'world': world_path}.items()
     )
 
     # Start Gazebo client    
@@ -32,7 +32,8 @@ def generate_launch_description():
     )
 
     # Robot State Publisher
-    urdf_file = os.path.join(pkg_path, 'urdf', 'ip010.urdf')
+    # urdf_file = os.path.join(pkg_path, 'urdf', 'ip010.urdf')
+    urdf_file = os.path.join(pkg_path, 'urdf', 'ip010_description_new.urdf')
 
     doc = xacro.parse(open(urdf_file))
     xacro.process_doc(doc)
@@ -66,7 +67,21 @@ def generate_launch_description():
         output='screen'
     )
 
+    rviz_config_file = os.path.join(pkg_path, "rviz", "gazebo_default.rviz")
+
+    rviz2 = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        output="screen",
+        arguments=["-d", rviz_config_file],
+    )
+
     return LaunchDescription([
+        TimerAction(
+            period=3.0,
+            actions=[rviz2]
+        ),
         start_gazebo_server_cmd,
         start_gazebo_client_cmd,
         robot_state_publisher,
