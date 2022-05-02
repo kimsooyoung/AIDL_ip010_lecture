@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <robot name="ip010" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <xacro:include filename="$(find ip010_gazebo)/urdf/ip010.gazebo" />
+
+  <link name='base_footprint' />
+
   <link name="base_link">
     <inertial>
       <origin xyz="-0.010365884133191 -0.000576778488747551 0.0698064146454796" rpy="0 0 0" />
@@ -10,7 +14,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/base_link.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/base_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.43921568627451 0.43921568627451 0.43921568627451 1" />
@@ -19,10 +23,16 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/base_link.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/base_link.STL" />
       </geometry>
     </collision>
   </link>
+
+  <joint name='base_link_joint' type='fixed'>
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="base_footprint" />
+    <child link="base_link" />
+  </joint>
 
   <link name="l_rear_wheel">
     <inertial>
@@ -33,7 +43,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/l_rear_wheel.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/l_rear_wheel.STL" />
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -42,12 +52,12 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/l_rear_wheel.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/l_rear_wheel.STL" />
       </geometry>
     </collision>
   </link>
 
-  <joint name="l_rear_wheel" type="continuous">
+  <joint name="l_rear_wheel_joint" type="continuous">
     <origin xyz="-0.0945002035940863 0.11 0.0350003475684688" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="l_rear_wheel" />
@@ -63,7 +73,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/r_rear_wheel.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/r_rear_wheel.STL" />
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -72,12 +82,12 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/r_rear_wheel.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/r_rear_wheel.STL" />
       </geometry>
     </collision>
   </link>
 
-  <joint name="r_rear_wheel" type="continuous">
+  <joint name="r_rear_wheel_joint" type="continuous">
     <origin xyz="-0.0944995996831282 -0.11 0.0350000447264209" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="r_rear_wheel" />
@@ -93,7 +103,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/front_ballcaster.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/front_ballcaster.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -102,15 +112,16 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/front_ballcaster.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/front_ballcaster.STL" />
       </geometry>
     </collision>
   </link>
 
-  <joint name="front_ballcaster" type="fixed">
+  <joint name="front_ballcaster_joint" type="fixed">
     <origin xyz="0.0879999994802632 0 0.000999753890741178" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="front_ballcaster" />
+    <!-- <axis xyz="0 0 -1" /> -->
   </joint>
 
   <link name="center_lidar">
@@ -122,7 +133,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/center_lidar.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/center_lidar.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -131,12 +142,12 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/center_lidar.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/center_lidar.STL" />
       </geometry>
     </collision>
   </link>
 
-  <joint name="center_lidar" type="fixed">
+  <joint name="center_lidar_joint" type="fixed">
     <origin xyz="-0.0321033068699902 -4.99877536184437E-05 0.119000000000201" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="center_lidar" />
@@ -152,7 +163,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/front_camera.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/front_camera.STL" />
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -161,12 +172,12 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://ip010_description/meshes/new/front_camera.STL" />
+        <mesh filename="$(find ip010_description)/meshes/new/front_camera.STL" />
       </geometry>
     </collision>
   </link>
 
-  <joint name="front_camera" type="fixed">
+  <joint name="front_camera_joint" type="fixed">
     <origin xyz="0.141847512071907 -0.000215421199799998 0.0680000000002" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="front_camera" />
