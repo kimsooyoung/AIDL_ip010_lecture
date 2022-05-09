@@ -33,3 +33,13 @@ if(BUILD_TESTING)
 endif()
 
 ament_package()
+
+install(
+  DIRECTORY
+    launch
+    config
+    maps
+    rviz
+  DESTINATION
+    share/${PROJECT_NAME}/
+)
