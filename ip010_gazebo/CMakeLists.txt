@@ -54,7 +54,6 @@ ament_package()
 install(
   DIRECTORY
     launch
-    meshes
     worlds
     rviz
     urdf
