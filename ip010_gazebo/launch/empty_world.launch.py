@@ -1,19 +1,38 @@
 import os
+import xacro
 
 from ament_index_python.packages import get_package_share_directory
-
 from launch import LaunchDescription
-from launch.event_handlers import OnProcessExit
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+
+from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription, TimerAction
 
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
-# from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
 
+from launch_ros.substitutions import FindPackageShare
+
+from osrf_pycommon.terminal_color import ansi
 import xacro
 
 def generate_launch_description():
+
+    open_rviz = LaunchConfiguration('open_rviz', default='true')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+
+    declare_open_rviz = DeclareLaunchArgument(
+        'open_rviz',
+        default_value='true',
+        description='Launch Rviz?'
+    )
+
+    declare_use_sim_time = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='true',
+        description='Use simulation/Gazebo clock'
+    )
 
     # gazebo
     pkg_gazebo_ros = FindPackageShare(package='gazebo_ros').find('gazebo_ros')   
@@ -75,9 +94,14 @@ def generate_launch_description():
         name="rviz2",
         output="screen",
         arguments=["-d", rviz_config_file],
+        parameters=[{'use_sim_time': use_sim_time}],
+        condition=IfCondition(LaunchConfiguration("open_rviz")),
     )
 
     return LaunchDescription([
+        declare_open_rviz,
+        declare_use_sim_time,
+
         TimerAction(
             period=3.0,
             actions=[rviz2]
