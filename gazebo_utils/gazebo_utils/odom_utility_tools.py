@@ -6,6 +6,7 @@ from gazebo_msgs.srv import GetEntityState
 
 
 """
+TODO: 주석 변경
 OdomUtilNode에는 Class가 포함되어 있음
 - EntityStateClient
     Gazebo에서 로봇의 x 위치 즉, pose.position.x를 주기적으로 받는다.
