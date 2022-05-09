@@ -12,8 +12,14 @@ ros2 launch ip010_description ip010_description.launch.py
 ros2 launch ip010_gazebo empty_world.launch.py
 ```
 
+## Odom utils & Sensor Fusion
+
+```
+
+```
+
 [] sensor fusion
-[] teleop
-[] slam
 [] localization
+[] slam
 [] navigation
+[] AIDL_ip010_robot
