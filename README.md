@@ -14,7 +14,12 @@ ros2 launch ip010_description ip010_description.launch.py
 * example 1 - empty world
 
 ```
-colcon build --symlink-install --packages-select ip010_description
+# clone aws-robomaker-small-warehouse-world pkg for external models
+cd <your-ws>/src
+git clone -b ros2 https://github.com/aws-robotics/aws-robomaker-small-warehouse-world.git
+colcon build --symlink-install --packages-select aws_robomaker_small_warehouse_world
+
+colcon build --symlink-install --packages-select ip010_gazebo
 source ./install/local_setup.bash
 
 ros2 launch ip010_gazebo empty_world.launch.py
@@ -40,13 +45,15 @@ ros2 launch ip010_gazebo factory_world.launch.py
 colcon build --symlink-install --packages-select gazebo_utils
 source ./install/local_setup.bash
 
-ros2 launch ip010_gazebo empty_world.launch.py
-
+ros2 launch ip010_gazebo empty_world.launch.py open_rviz:=false
 ros2 run gazebo_utils odom_utility_tools
 ```
 
-Execute `rqt` and spawn 4 rqt_plots.
-Then compare BTW gt odom and odom topic's odom
+Run `rqt` then spawn 4 rqt_plots.
+
+![image](https://user-images.githubusercontent.com/12381733/169341841-ca9b6dde-5245-437d-a742-eeff2a458d60.png)
+
+Then compare gt odom with odom topic's values.
 
 * Sensor Fusion
 
@@ -66,6 +73,8 @@ ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
 ros2 launch ip010_slam gazebo_slam_toolbox.launch.py 
 ```
 
+![image](https://user-images.githubusercontent.com/12381733/169345139-15c5de3b-5117-446f-9dd1-b86b787071e6.png)
+
 * cartographer
 
 ```
@@ -74,8 +83,15 @@ ros2 launch ip010_slam gazebo_slam_toolbox.launch.py
 
 ## Localization
 
+```
+
+```
+
 ## Navigation
 
+```
+
+```
 
 ## Obstable avoidance
 
