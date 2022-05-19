@@ -25,11 +25,11 @@ from nav2_common.launch import RewrittenYaml
 
 def generate_launch_description():
     # Get the launch directory
-    my_nav_dir = get_package_share_directory('src_nav')
+    my_nav_dir = get_package_share_directory('ip010_nav')
     my_param_dir = os.path.join(my_nav_dir, 'param')    
     my_param_file = 'src_regulated_pure_pursuit.yaml'
     my_map_dir = os.path.join(my_nav_dir, 'map')
-    my_map_file = 'racecourse.yaml'
+    my_map_file = 'factory_map.yaml'
 
     namespace = LaunchConfiguration('namespace')
     map_yaml_file = LaunchConfiguration('map')

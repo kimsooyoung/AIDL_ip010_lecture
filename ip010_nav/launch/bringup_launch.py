@@ -28,7 +28,7 @@ from launch_ros.actions import PushRosNamespace
 
 def generate_launch_description():
     # Get the launch directory
-    my_nav_dir = get_package_share_directory('src_nav')
+    my_nav_dir = get_package_share_directory('ip010_nav')
     my_launch_dir = os.path.join(my_nav_dir, 'launch')
     
     my_param_dir = os.path.join(my_nav_dir, 'param')
@@ -39,7 +39,7 @@ def generate_launch_description():
     my_bt_file = 'navigate_w_replanning_and_recovery.xml'
 
     my_map_dir = os.path.join(my_nav_dir, 'map')
-    my_map_file = 'racecourse.yaml'
+    my_map_file = 'factory_map.yaml'
 
     rviz_config = os.path.join(my_nav_dir, 'rviz', 'nav2_default_view.rviz')
 

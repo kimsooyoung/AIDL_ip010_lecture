@@ -25,11 +25,16 @@ source ./install/local_setup.bash
 ros2 launch ip010_gazebo empty_world.launch.py
 ```
 
+![image](https://user-images.githubusercontent.com/12381733/169349414-fc2bece6-f1a3-47fb-837f-6b6f2ff16f3a.png)
+
+
 * example 2 - factory world
 
 ```
 ros2 launch ip010_gazebo factory_world.launch.py
 ```
+
+![image](https://user-images.githubusercontent.com/12381733/169349575-8e53d2c8-4635-4e9b-9056-1f0ba197cec8.png)
 
 * example 3 - Small Village
 
@@ -73,6 +78,12 @@ ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
 ros2 launch ip010_slam gazebo_slam_toolbox.launch.py 
 ```
 
+save map
+
+```
+
+```
+
 ![image](https://user-images.githubusercontent.com/12381733/169345139-15c5de3b-5117-446f-9dd1-b86b787071e6.png)
 
 * cartographer
@@ -84,13 +95,23 @@ ros2 launch ip010_slam gazebo_slam_toolbox.launch.py
 ## Localization
 
 ```
+ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
 
+ros2 launch ip010_amcl amcl.launch.py
 ```
+
+![image](https://user-images.githubusercontent.com/12381733/169355890-c182afdd-8921-4f9d-bc79-1c450ec8a139.png)
 
 ## Navigation
 
 ```
+ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
 
+ros2 launch ip010_nav bringup_launch.py 
+
+ros2 launch ip010_nav localization_launch.py use_sim_time:=true
+ros2 launch ip010_nav navigation_launch.py use_sim_time:=true
+ros2 launch ip010_nav rviz_view_launch.py use_sim_time:=true
 ```
 
 ## Obstable avoidance
