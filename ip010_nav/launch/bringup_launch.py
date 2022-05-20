@@ -34,7 +34,7 @@ def generate_launch_description():
     my_param_dir = os.path.join(my_nav_dir, 'param')
     
     # my_param_file = 'src_dwb_params.yaml'
-    my_param_file = 'src_regulated_pure_pursuit.yaml'
+    my_param_file = 'ip010_regulated_pure_pursuit.yaml'
     
     my_bt_file = 'navigate_w_replanning_and_recovery.xml'
 
