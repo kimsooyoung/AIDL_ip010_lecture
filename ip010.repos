@@ -1,12 +1,12 @@
 repositories:
-  neuronbot2:
+  AIDL_ip010_lecture:
+    type: git
+    url: https://github.com/kimsooyoung/AIDL_ip010_lecture.git
+    version: main
+  aws-robomaker-small-warehouse-world:
     type: git
     url: https://github.com/aws-robotics/aws-robomaker-small-warehouse-world.git
     version: ros2
-  # rplidar_ros:
-  #   type: git
-  #   url: https://github.com/Adlink-ROS/rplidar_ros.git
-  #   version: foxy-devel
   # serial:
   #   type: git
   #   url: https://github.com/Adlink-ROS/serial.git
