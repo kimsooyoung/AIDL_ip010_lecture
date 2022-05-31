@@ -171,4 +171,14 @@
     <parent link="base_link" />
     <child link="front_camera" />
   </joint>
+
+  <link name='imu_link' />
+  
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="-0.0945002035940863 0.0 0.0350003475684688" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="imu_link" />
+    <axis xyz="0 1 0" />
+  </joint>
+
 </robot>
