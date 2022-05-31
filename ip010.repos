@@ -1,0 +1,17 @@
+repositories:
+  neuronbot2:
+    type: git
+    url: https://github.com/aws-robotics/aws-robomaker-small-warehouse-world.git
+    version: ros2
+  # rplidar_ros:
+  #   type: git
+  #   url: https://github.com/Adlink-ROS/rplidar_ros.git
+  #   version: foxy-devel
+  # serial:
+  #   type: git
+  #   url: https://github.com/Adlink-ROS/serial.git
+  #   version: foxy-devel
+  # slam_gmapping:
+  #   type: git
+  #   url: https://github.com/Adlink-ROS/slam_gmapping
+  #   version: foxy-devel
