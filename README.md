@@ -95,8 +95,10 @@ save map
 ## Localization
 
 ```
-ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
+colcon build --symlink-install --packages-select ip010_amcl
+source ./install/local_setup.bash
 
+ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
 ros2 launch ip010_amcl amcl.launch.py
 ```
 
@@ -105,6 +107,9 @@ ros2 launch ip010_amcl amcl.launch.py
 ## Navigation
 
 ```
+colcon build --symlink-install --packages-select ip010_nav
+source ./install/local_setup.bash
+
 ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
 
 ros2 launch ip010_nav bringup_launch.py 
@@ -126,9 +131,6 @@ ros2 launch ip010_nav rviz_view_launch.py use_sim_time:=true
 - /grond_truth_y/data vs /odom/pose/pose/position/y
 
 [] gif add
-
-
-
 [] dependency check & rosdep setup
 [] sensor fusion
 [] localization

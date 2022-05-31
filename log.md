@@ -15,3 +15,60 @@ source /usr/share/gazebo/setup.sh
     좀 더 타이트하게 직각직각으로 가게 하고프면
     rotate_to_heading_min_angle를 많이 줄이면 된다.
 - [] 
+
+# 처음부터 다시 세팅 하면서 로그
+
+- ROS 2 설치
+
+- apt install
+
+sudo apt update && sudo apt install -y \
+  build-essential \
+  cmake \
+  git \
+  libbullet-dev \
+  python3-colcon-common-extensions \
+  python3-flake8 \
+  python3-pip \
+  python3-pytest-cov \
+  python3-rosdep \
+  python3-setuptools \
+  python3-vcstool \
+  openssh-server \
+  wget
+
+sudo apt update && sudo apt install -y \
+  gedit \
+  ros-foxy-xacro \
+  ros-foxy-joint-state-publisher \
+  ros-foxy-joint-state-publisher-gui \
+  ros-foxy-gazebo-ros-pkgs \
+  ros-foxy-rqt-robot-steering \
+  ros-foxy-robot-localization \
+  ros-foxy-slam-toolbox \
+  ros-foxy-nav2-* 
+
+
+- xlaunch 설정
+
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0 
+export LIBGL_ALWAYS_INDIRECT=0
+
+- vcs로 패키지 가져오기
+
+cd ~/ros2_ws
+wget https://raw.githubusercontent.com/kimsooyoung/AIDL_ip010_lecture/main/ip010.repos
+vcs import src < ip010.repos
+
+- 빌드
+
+gazebo example
+
+cmake 주석 해제 => .urdf 제거 => 빌드 => rosfoxy => 주석 해제 => 빌드
+source /usr/share/gazebo/setup.sh
+
+SF example
+
+$ ros2 run gazebo_utils odom_utility_tools
+[INFO] [1653984161.621405561] [reset_model_client]: ==== Entity State Service Client Ready ====
+
