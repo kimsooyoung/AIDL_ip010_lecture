@@ -64,6 +64,8 @@ vcs import src < ip010.repos
 
 gazebo example
 
+
+
 cmake 주석 해제 => .urdf 제거 => 빌드 => rosfoxy => 주석 해제 => 빌드
 source /usr/share/gazebo/setup.sh
 

@@ -22,6 +22,9 @@ colcon build --symlink-install --packages-select aws_robomaker_small_warehouse_w
 colcon build --symlink-install --packages-select ip010_gazebo
 source ./install/local_setup.bash
 
+colcon build --symlink-install --packages-select rviz_plugin_tutorials
+source ./install/local_setup.bash
+
 ros2 launch ip010_gazebo empty_world.launch.py
 ```
 
