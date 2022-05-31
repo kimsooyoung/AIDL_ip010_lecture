@@ -1,15 +1,15 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <robot name="ip010" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  
+
   <xacro:include filename="$(find ip010_gazebo)/urdf/ip010.gazebo" />
 
   <link name='base_footprint' />
 
   <link name="base_link">
     <inertial>
-      <origin xyz="-0.000385245156391871 -0.000529111847711822 0.0653719962073427" rpy="0 0 0" />
-      <mass value="1.22178095373168" />
-      <inertia ixx="0.00627094203593516" ixy="3.03044325621882E-05" ixz="0.000574351883582968" iyy="0.00807367810614195" iyz="-9.26695226612923E-06" izz="0.0136241544527254" />
+      <origin xyz="-0.010365884133191 -0.000576778488747551 0.0698064146454796" rpy="0 0 0" />
+      <mass value="1.12083938753469" />
+      <inertia ixx="0.00625390309602125" ixy="3.03054612238855E-05" ixz="0.000573867658783163" iyy="0.0080987780933677" iyz="-9.26731016583709E-06" izz="0.0136845094087104" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -36,9 +36,9 @@
 
   <link name="l_rear_wheel">
     <inertial>
-      <origin xyz="-0.000276941065544781 -0.0201570866836339 0.000883513372436709" rpy="0 0 0" />
-      <mass value="0.115203108377027" />
-      <inertia ixx="3.76597824097435E-05" ixy="4.04398415924187E-09" ixz="-7.54861656391369E-09" iyy="6.30867844960361E-05" iyz="-1.25464212048792E-08" izz="3.7679837109253E-05" />
+      <origin xyz="0.000416078291276656 -0.020157083474482 0.000827146053683048" rpy="0 0 0" />
+      <mass value="0.115203103310497" />
+      <inertia ixx="3.76619524598008E-05" ixy="-5.82867896238268E-09" ixz="9.78735956742376E-09" iyy="6.30867844857624E-05" iyz="-1.1823408757557E-08" izz="3.76776670177481E-05" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -58,17 +58,17 @@
   </link>
 
   <joint name="l_rear_wheel_joint" type="continuous">
-    <origin xyz="-0.0945003880978201 0.11 0.0350001078633251" rpy="0 0 0" />
+    <origin xyz="-0.0945002035940863 0.11 0.0350003475684688" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="l_rear_wheel" />
     <axis xyz="0 1 0" />
   </joint>
-  
+
   <link name="r_rear_wheel">
     <inertial>
-      <origin xyz="-0.000279144572909285 0.020157085967068 0.000882819590486731" rpy="0 0 0" />
-      <mass value="0.115203107255679" />
-      <inertia ixx="3.76592750408973E-05" ixy="-3.87283160946061E-09" ixz="-6.82269545443431E-09" iyy="6.30867844954026E-05" iyz="1.26003043153597E-08" izz="3.76803444665559E-05" />
+      <origin xyz="0.000414013270580993 0.0201570841374701 0.000828181653934248" rpy="0 0 0" />
+      <mass value="0.115203104348033" />
+      <inertia ixx="3.76626622310331E-05" ixy="5.98907546101305E-09" ixz="1.0317087954516E-08" iyy="6.30867844864224E-05" iyz="1.17429752615601E-08" izz="3.76769572572774E-05" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -86,19 +86,49 @@
       </geometry>
     </collision>
   </link>
-  
+
   <joint name="r_rear_wheel_joint" type="continuous">
-    <origin xyz="-0.0944997436888031 -0.11 0.035000310739568" rpy="0 0 0" />
+    <origin xyz="-0.0944995996831282 -0.11 0.0350000447264209" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="r_rear_wheel" />
     <axis xyz="0 1 0" />
   </joint>
-  
+
+  <link name="front_ballcaster">
+    <inertial>
+      <origin xyz="2.32896466001442E-10 1.88369250417493E-10 0.00930627232022497" rpy="0 0 0" />
+      <mass value="0.0209327830608877" />
+      <inertia ixx="1.48299880678707E-06" ixy="-1.7043650171883E-13" ixz="-7.73616758546749E-15" iyy="1.31107957877558E-06" iyz="-6.17056111578677E-15" izz="1.88921846876978E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="$(find ip010_description)/meshes/front_ballcaster.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="$(find ip010_description)/meshes/front_ballcaster.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="front_ballcaster_joint" type="fixed">
+    <origin xyz="0.0879999994802632 0 0.000999753890741178" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="front_ballcaster" />
+    <!-- <axis xyz="0 0 -1" /> -->
+  </joint>
+
   <link name="center_lidar">
     <inertial>
-      <origin xyz="0.00745008536583489 -0.000328953238206021 -0.0193022240939329" rpy="0 0 0" />
-      <mass value="0.118327011339017" />
-      <inertia ixx="3.75663376249697E-05" ixy="-1.04736915416129E-07" ixz="-4.28429420894516E-07" iyy="4.21124856419297E-05" iyz="9.24636939164067E-09" izz="4.6508188174353E-05" />
+      <origin xyz="0.00755339223480704 -0.00027896548418537 -0.0300022240938231" rpy="0 0 0" />
+      <mass value="0.118327011344308" />
+      <inertia ixx="3.75663376269071E-05" ixy="-1.04736914369223E-07" ixz="-4.28429420760351E-07" iyy="4.21124856446319E-05" iyz="9.24636933962534E-09" izz="4.65081881789805E-05" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -116,19 +146,19 @@
       </geometry>
     </collision>
   </link>
-  
+
   <joint name="center_lidar_joint" type="fixed">
-    <origin xyz="-0.031999999999999 0 0.108300000000198" rpy="0 0 0" />
+    <origin xyz="-0.0321033068699902 -4.99877536184437E-05 0.119000000000201" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="center_lidar" />
     <!-- <axis xyz="0 0 -1" /> -->
   </joint>
-  
+
   <link name="front_camera">
     <inertial>
-      <origin xyz="-0.00497560083527254 1.16551733542192E-18 -0.00156090309940154" rpy="0 0 0" />
+      <origin xyz="-0.00497560083527254 5.6920614055489E-19 -0.00156090309940154" rpy="0 0 0" />
       <mass value="0.000679586163770489" />
-      <inertia ixx="5.37689116983891E-08" ixy="7.2963616570538E-26" ixz="-5.56265931483273E-10" iyy="2.8597907949626E-08" iyz="-3.19266396131941E-24" izz="2.75239156052624E-08" />
+      <inertia ixx="5.37689116983891E-08" ixy="6.67253526693495E-26" ixz="-5.56265931483273E-10" iyy="2.8597907949626E-08" iyz="-3.19408275992568E-24" izz="2.75239156052624E-08" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -146,11 +176,10 @@
       </geometry>
     </collision>
   </link>
-  
+
   <joint name="front_camera_joint" type="fixed">
-    <origin xyz="0.141847512071907 -0.000215421199800007 0.0680000000002" rpy="0 0 0" />
+    <origin xyz="0.141847512071907 -0.000215421199799998 0.0680000000002" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="front_camera" />
-    <!-- <axis xyz="1 0 0" /> -->
   </joint>
 </robot>

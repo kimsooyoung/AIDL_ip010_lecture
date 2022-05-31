@@ -51,7 +51,7 @@ def generate_launch_description():
     )
 
     # Robot State Publisher
-    urdf_file = os.path.join(pkg_path, 'urdf', 'ip010_description.urdf')
+    urdf_file = os.path.join(pkg_path, 'urdf', 'ip010.urdf')
 
     doc = xacro.parse(open(urdf_file))
     xacro.process_doc(doc)
