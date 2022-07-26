@@ -15,4 +15,5 @@ sudo apt install ros-foxy-robot-state-publisher -y
 sudo apt install ros-foxy-nav2-* -y
 sudo apt install ros-foxy-slam-toolbox -y
 sudo apt install ros-foxy-teleop-twist-keyboard -y
-sudo apt install ros-foxy-gazebo-ros-pkgs 
+sudo apt install ros-foxy-gazebo-ros-pkgs -y
+sudo apt install ros-foxy-robot-localization -y

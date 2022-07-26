@@ -74,3 +74,27 @@ SF example
 $ ros2 run gazebo_utils odom_utility_tools
 [INFO] [1653984161.621405561] [reset_model_client]: ==== Entity State Service Client Ready ====
 
+
+```
+cd AIDL_ip010_lecture
+./setup_scripts.sh
+vcs import ../ < deps.repos
+
+cd ~/ros2_ws
+cbp ip010_description && rosfoxy
+cbp ip010_gazebo && rosfoxy
+cbp ip010_slam && rosfoxy
+cbp ip010_slam && rosfoxy
+cbp ip010_nav && rosfoxy
+cbp gazebo_utils && rosfoxy
+
+cbp aws_robomaker_small_warehouse_world && rosfoxy
+```
+
+slam
+
+```
+ros2 launch ip010_gazebo factory_world.launch.py
+ros2 launch ip010_slam gazebo_slam_toolbox.launch.py
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```

@@ -94,7 +94,6 @@ def generate_launch_description():
             '-y', '2.15',
             '-z', '0.10',
             '-Y', '3.14',
-
             # '-x', '6.0',
             # '-y', '2.2',
             # '-z', '0.1',
@@ -138,5 +137,5 @@ def generate_launch_description():
         robot_state_publisher,
         joint_state_publisher,
         spawn_entity,
-        rqt_robot_steering,
+        # rqt_robot_steering,
     ])
