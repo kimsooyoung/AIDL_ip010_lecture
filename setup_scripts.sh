@@ -8,11 +8,12 @@ sudo apt-get update
 
 echo -e "${GREEN}==== Installing External ROS Packages ====${NC}"
 
-sudo apt install ros-foxy-xacro -y
-sudo apt install ros-foxy-joint-state-publisher-gui -y
-sudo apt install ros-foxy-joint-state-publisher -y
-sudo apt install ros-foxy-robot-state-publisher -y
-sudo apt install ros-foxy-nav2-* -y
-sudo apt install ros-foxy-slam-toolbox -y
-sudo apt install ros-foxy-teleop-twist-keyboard -y
-sudo apt install ros-foxy-gazebo-ros-pkgs 
+sudo apt install ros-$ROS_DISTRO-xacro -y
+sudo apt install ros-$ROS_DISTRO-joint-state-publisher-gui -y
+sudo apt install ros-$ROS_DISTRO-joint-state-publisher -y
+sudo apt install ros-$ROS_DISTRO-robot-state-publisher -y
+
+sudo apt install ros-$ROS_DISTRO-nav2-* -y
+sudo apt install ros-$ROS_DISTRO-slam-toolbox -y
+sudo apt install ros-$ROS_DISTRO-teleop-twist-keyboard -y
+sudo apt install ros-$ROS_DISTRO-gazebo-ros-pkgs
