@@ -33,13 +33,14 @@ def generate_launch_description():
     
     my_param_dir = os.path.join(my_nav_dir, 'param')
     
-    # my_param_file = 'src_dwb_params.yaml'
+    # my_param_file = 'ip010_dwb_params.yaml'
     my_param_file = 'ip010_regulated_pure_pursuit.yaml'
     
     my_bt_file = 'navigate_w_replanning_and_recovery.xml'
 
     my_map_dir = os.path.join(my_nav_dir, 'map')
-    my_map_file = 'factory_map.yaml'
+    # my_map_file = 'factory_map.yaml'
+    my_map_file = 'editted_map.yaml'
 
     rviz_config = os.path.join(my_nav_dir, 'rviz', 'nav2_default_view.rviz')
 
