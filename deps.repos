@@ -1,5 +1,9 @@
 repositories:
-  aws-robotics/aws-robomaker-small-warehouse-world:
+  aws-robomaker-small-warehouse-world:
     type: git
     url: https://github.com/aws-robotics/aws-robomaker-small-warehouse-world.git
     version: ros2
+  nav2_rosdevday_2021:
+    type: git
+    url : https://github.com/Road-Balance/nav2_rosdevday_2021.git
+    version: main

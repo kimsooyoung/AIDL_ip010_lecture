@@ -81,20 +81,53 @@ cd AIDL_ip010_lecture
 vcs import ../ < deps.repos
 
 cd ~/ros2_ws
+cbp ip010_amcl && rosfoxy
 cbp ip010_description && rosfoxy
 cbp ip010_gazebo && rosfoxy
-cbp ip010_slam && rosfoxy
-cbp ip010_slam && rosfoxy
 cbp ip010_nav && rosfoxy
+cbp ip010_slam && rosfoxy
 cbp gazebo_utils && rosfoxy
 
 cbp aws_robomaker_small_warehouse_world && rosfoxy
+cbp nav2_rosdevday_2021 && rosfoxy
+
 ```
 
 slam
 
 ```
-ros2 launch ip010_gazebo factory_world.launch.py
+ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
+# 몇번 해야 한다.
+source /usr/share/gazebo/setup.sh
+
 ros2 launch ip010_slam gazebo_slam_toolbox.launch.py
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+
+amml 
+
+```
+ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
+
+ros2 launch ip010_amcl amcl.launch.py
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+
+nav
+
+```
+ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
+
+ros2 launch ip010_nav bringup_launch.py 
+```
+
+nav2 app
+
+```
+cd ~/aidl_ws/src/nav2_rosdevday_2021/nav2_rosdevday_2021/scripts
+chmod +x *
+
+ros2 run nav2_rosdevday_2021 picking_demo.py 
+ros2 run nav2_rosdevday_2021 inspection_demo.py
+
 ```
