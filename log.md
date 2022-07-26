@@ -131,3 +131,47 @@ ros2 run nav2_rosdevday_2021 picking_demo.py
 ros2 run nav2_rosdevday_2021 inspection_demo.py
 
 ```
+
+## Odom utils & Sensor Fusion
+
+* odom comparison
+
+```
+colcon build --symlink-install --packages-select gazebo_utils
+source ./install/local_setup.bash
+
+ros2 launch ip010_gazebo empty_world.launch.py open_rviz:=false
+ros2 run gazebo_utils odom_utility_tools
+```
+
+Run `rqt` then spawn 4 rqt_plots.
+
+![image](https://user-images.githubusercontent.com/12381733/169341841-ca9b6dde-5245-437d-a742-eeff2a458d60.png)
+
+Then compare gt odom with odom topic's values.
+
+* Sensor Fusion
+
+```
+
+```
+
+
+## Obstable avoidance
+
+## Swarming
+
+## Parking
+
+## (Option) Deep Learning Nodes
+
+- /grond_truth_x/data vs /odom/pose/pose/position/x
+- /grond_truth_y/data vs /odom/pose/pose/position/y
+
+[] gif add
+[] dependency check & rosdep setup
+[] sensor fusion
+[] localization
+[] slam
+[] navigation
+[] AIDL_ip010_robot

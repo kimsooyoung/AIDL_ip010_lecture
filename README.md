@@ -1,118 +1,101 @@
 # AIDL_ip010_lecture
 
-```
-colcon build --symlink-install --packages-select ip010_description
-source ./install/local_setup.bash
+* Autonomous driving simulation based on ROS 2's Nav2 and AIDL's IP010
 
+## Prerequisite
+
+* ROS 2 (> Foxy)
+* Gazebo (Not a Ignition Gazebo, Gazebo 11 maybe)
+* Dependency Packages
+
+## Prepare Dependencies
+
+```
+# Clone this Repo
+git clone
+
+# Install all ROS 2 depends through shell scripts
+cd AIDL_ip010_lecture
+./setup_scripts.sh
+vcs import ../ < deps.repos
+
+# Build Packages
+cd ~/<your-ws>
+
+cbp ip010_amcl && rosfoxy
+cbp ip010_description && rosfoxy
+cbp ip010_gazebo && rosfoxy
+cbp ip010_nav && rosfoxy
+cbp ip010_slam && rosfoxy
+cbp gazebo_utils && rosfoxy
+cbp aws_robomaker_small_warehouse_world && rosfoxy
+cbp nav2_rosdevday_2021 && rosfoxy
+```
+
+# Examples
+
+* IP010 description
+
+```
 ros2 launch ip010_description ip010_description.launch.py
 ```
 
-<img width="886" alt="image" src="https://user-images.githubusercontent.com/12381733/164188762-98a6ba84-fdd2-4a0f-a6dc-c5c6abe946fb.png">
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/12381733/164188762-98a6ba84-fdd2-4a0f-a6dc-c5c6abe946fb.png" height="250">
+</p>
 
-## Gazebo
-
-* example 1 - empty world
+* Gazebo example 1 - empty world
 
 ```
-# clone aws-robomaker-small-warehouse-world pkg for external models
-cd <your-ws>/src
-git clone -b ros2 https://github.com/aws-robotics/aws-robomaker-small-warehouse-world.git
-colcon build --symlink-install --packages-select aws_robomaker_small_warehouse_world
-
-colcon build --symlink-install --packages-select ip010_gazebo
-source ./install/local_setup.bash
-
-colcon build --symlink-install --packages-select rviz_plugin_tutorials
-source ./install/local_setup.bash
-
 ros2 launch ip010_gazebo empty_world.launch.py
 ```
 
-![image](https://user-images.githubusercontent.com/12381733/169349414-fc2bece6-f1a3-47fb-837f-6b6f2ff16f3a.png)
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/12381733/169349414-fc2bece6-f1a3-47fb-837f-6b6f2ff16f3a.png" height="250">
+</p>
 
 
-* example 2 - factory world
+* Gazebo example 2 - AWS Warehouse world
 
 ```
 ros2 launch ip010_gazebo factory_world.launch.py
 ```
 
-![image](https://user-images.githubusercontent.com/12381733/169349575-8e53d2c8-4635-4e9b-9056-1f0ba197cec8.png)
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/12381733/169349575-8e53d2c8-4635-4e9b-9056-1f0ba197cec8.png" height="250">
+</p>
 
-* example 3 - Small Village
 
-```
+---
 
-```
-
-## Odom utils & Sensor Fusion
-
-* odom comparison
-
-```
-colcon build --symlink-install --packages-select gazebo_utils
-source ./install/local_setup.bash
-
-ros2 launch ip010_gazebo empty_world.launch.py open_rviz:=false
-ros2 run gazebo_utils odom_utility_tools
-```
-
-Run `rqt` then spawn 4 rqt_plots.
-
-![image](https://user-images.githubusercontent.com/12381733/169341841-ca9b6dde-5245-437d-a742-eeff2a458d60.png)
-
-Then compare gt odom with odom topic's values.
-
-* Sensor Fusion
-
-```
-
-```
-
-## SLAM
+## Nav2 related Example
 
 * slam_toolbox
 
 ```
-colcon build --symlink-install --packages-select ip010_slam
-source ./install/local_setup.bash
-
 ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
 ros2 launch ip010_slam gazebo_slam_toolbox.launch.py 
 ```
 
-save map
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/12381733/169345139-15c5de3b-5117-446f-9dd1-b86b787071e6.png" height="250">
+</p>
+
+
+* AMCL - Localization
 
 ```
-
-```
-
-![image](https://user-images.githubusercontent.com/12381733/169345139-15c5de3b-5117-446f-9dd1-b86b787071e6.png)
-
-* cartographer
-
-```
-
-```
-
-## Localization
-
-```
-colcon build --symlink-install --packages-select ip010_amcl
-source ./install/local_setup.bash
-
 ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
 ros2 launch ip010_amcl amcl.launch.py
 ```
 
-![image](https://user-images.githubusercontent.com/12381733/169355890-c182afdd-8921-4f9d-bc79-1c450ec8a139.png)
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/12381733/169355890-c182afdd-8921-4f9d-bc79-1c450ec8a139.png" height="250">
+</p>
 
-## Navigation
+* Navigation - pure pursuit, dwb andvarious parameter changed examples exists
 
 ```
-colcon build --symlink-install --packages-select ip010_nav
-source ./install/local_setup.bash
-
 ros2 launch ip010_gazebo factory_world.launch.py open_rviz:=false
 
 ros2 launch ip010_nav bringup_launch.py 
@@ -122,21 +105,6 @@ ros2 launch ip010_nav navigation_launch.py use_sim_time:=true
 ros2 launch ip010_nav rviz_view_launch.py use_sim_time:=true
 ```
 
-## Obstable avoidance
-
-## Swarming
-
-## Parking
-
-## (Option) Deep Learning Nodes
-
-- /grond_truth_x/data vs /odom/pose/pose/position/x
-- /grond_truth_y/data vs /odom/pose/pose/position/y
-
-[] gif add
-[] dependency check & rosdep setup
-[] sensor fusion
-[] localization
-[] slam
-[] navigation
-[] AIDL_ip010_robot
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/12381733/181112851-626d1143-6d70-4105-8768-03c7e8235417.png" height="250">
+</p>
