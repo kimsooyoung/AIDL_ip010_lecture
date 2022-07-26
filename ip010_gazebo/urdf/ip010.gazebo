@@ -52,21 +52,26 @@
     <selfCollide>true</selfCollide>
   </gazebo>
 
+  <!-- gaussian noise model imu -->
   <gazebo reference="imu_link">
     <gravity>true</gravity>
     <sensor name="imu_sensor" type="imu">
       <always_on>true</always_on>
       <update_rate>100</update_rate>
       <visualize>true</visualize>
-      <!-- <topic>imu</topic> -->
+      <topic>imu</topic>
       <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
         <bodyName>imu_link</bodyName>
         <updateRateHZ>100.0</updateRateHZ>
+        <!-- <gaussianNoise>0.0</gaussianNoise> -->
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
         <frameName>imu_link</frameName>
-        <initial_orientation_as_reference>false</initial_orientation_as_reference>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
         <ros>
-          <namespace>/imu</namespace>
-          <argument>~/out:=imu_data</argument>
+          <namespace>/skidbot/imu</namespace>
+          <remapping>~/out:=data</remapping>
         </ros>
       </plugin>
       <pose>0 0 0 0 0 0</pose>
@@ -102,13 +107,19 @@
       <sensor name="lidar" type="ray">
         <!-- Rplidar A1 Specification Referred -->
         <!-- https://www.slamtec.com/en/Lidar/A1Spec -->
+        <pose>0 0 0 0 0 0</pose>
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <update_rate>10</update_rate>
         <ray>
           <scan>
             <horizontal>
               <samples>360</samples>
               <resolution>1.000000</resolution>
               <min_angle>-3.14159</min_angle>
+              <!-- <min_angle>-1.5707</min_angle> -->
               <max_angle>3.14159</max_angle>
+              <!-- <max_angle>1.5707</max_angle> -->
             </horizontal>
           </scan>
           <range>
